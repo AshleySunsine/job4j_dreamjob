@@ -26,7 +26,7 @@
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">Объявления</th>
+                <th scope="col">Объявления:</th>
             </tr>
             </thead>
             <tbody>
