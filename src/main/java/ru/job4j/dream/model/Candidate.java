@@ -8,10 +8,9 @@ public class Candidate {
     private int id;
     private List<Resume> resumeList;
 
-    public Candidate(String name, int id, List<Resume> resumeList) {
+    public Candidate(int id, String name) {
         this.name = name;
         this.id = id;
-        this.resumeList = resumeList;
     }
 
     public String getName() {
