@@ -2,7 +2,6 @@ package ru.job4j.dream.store;
 
 import ru.job4j.dream.model.Candidate;
 import ru.job4j.dream.model.Post;
-
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -32,10 +31,6 @@ public class Store {
         posts.put(post.getId(), post);
     }
 
-    public Post findPostById(int id) {
-        return posts.get(id);
-    }
-
     public void saveCandidate(Candidate candidate) {
         if (candidate.getId() == 0) {
             candidate.setId(candidateId.incrementAndGet());
@@ -47,6 +42,9 @@ public class Store {
         return candidates.get(id);
     }
 
+    public Post findPostById(int id) {
+        return posts.get(id);
+    }
 
     public static Store instOf() {
         return INST;
