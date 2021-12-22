@@ -45,7 +45,6 @@ public class UploadImageCandidateServlet extends HttpServlet {
             for (FileItem item : items) {
                 if (!item.isFormField()) {
                     String s = req.getParameter("id");
-                    System.out.println("************" + s);
                     File file = new File(folder + File.separator + s);
 
                     try (FileOutputStream out = new FileOutputStream(file)) {
@@ -56,6 +55,6 @@ public class UploadImageCandidateServlet extends HttpServlet {
         } catch (FileUploadException e) {
             e.printStackTrace();
         }
-        doGet(req, resp);
+        resp.sendRedirect(req.getContextPath() + "/candidates.do");
     }
 }

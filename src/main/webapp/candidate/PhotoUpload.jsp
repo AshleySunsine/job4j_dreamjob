@@ -22,11 +22,10 @@
         </thead>
     </table>
     <h2>Upload image</h2>
-
-<%String id = request.getParameter("id");%>
-    <form action="<c:url value='/uploadImageCandidate'/>" method="post" enctype="multipart/form-data">
+   <form action="<%=request.getContextPath()%>/uploadImageCandidate?id=<%=request.getParameter("idd")%>"
+         method="post" enctype="multipart/form-data">
         <div class="checkbox">
-            <input type="file" name="<%=id%>">
+            <input type="file" name="name">
         </div>
         <button type="submit" class="btn btn-default">Загрузить</button>
     </form>

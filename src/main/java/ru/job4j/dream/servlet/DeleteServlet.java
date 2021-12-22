@@ -21,5 +21,6 @@ public class DeleteServlet extends HttpServlet {
             break;
         }
         Files.delete(fileToDelete.toPath());
+        resp.sendRedirect(req.getContextPath() + "/candidates.do");
     }
 }
