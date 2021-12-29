@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.util.*;
 
 public class ReadConfigProp {
-    private static final ReadConfigProp INST = new ReadConfigProp("./resources/.properties");
+    private static final ReadConfigProp INST = new ReadConfigProp("./resources/dream.properties");
     private String path;
     private final Map<String, String> values = new HashMap<>();
 
