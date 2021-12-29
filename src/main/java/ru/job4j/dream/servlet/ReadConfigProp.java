@@ -1,13 +1,11 @@
 package ru.job4j.dream.servlet;
 
-import ru.job4j.dream.store.Store;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.*;
 
 public class ReadConfigProp {
-    private static final ReadConfigProp INST = new ReadConfigProp("./data/.properties");
+    private static final ReadConfigProp INST = new ReadConfigProp("./resources/.properties");
     private String path;
     private final Map<String, String> values = new HashMap<>();
 
