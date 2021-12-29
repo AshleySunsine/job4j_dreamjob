@@ -9,5 +9,7 @@ public class MainStore {
         for (Post post : store.findAllPosts()) {
             System.out.println(post.getId() + " " + post.getName());
         }
+        store.save(new Post(1, "Jaga-Jaga Job"));
+        System.out.println(store.findById(1).getId() + " " + store.findById(1).getName());
     }
 }
