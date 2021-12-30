@@ -10,10 +10,10 @@ import java.io.IOException;
 
 public class DownloadServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String name = req.getParameter("name");
         File downloadFile = null;
-        for (File file : new File(ReadConfigProp.getInstance().value("pathImage")).listFiles()) {
+        for (File file : new File(ReadConfigProp.value("pathImage")).listFiles()) {
             if (name.equals(file.getName())) {
                 downloadFile = file;
                 break;

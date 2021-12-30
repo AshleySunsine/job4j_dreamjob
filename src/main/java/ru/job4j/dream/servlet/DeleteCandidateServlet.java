@@ -16,7 +16,7 @@ public class DeleteCandidateServlet extends HttpServlet {
         File fileToDelete;
         String nameForDelete = req.getParameter("id");
         System.out.println("****** -DeleteCandidate " + nameForDelete);
-        for (File file: new File(ReadConfigProp.getInstance().value("pathImage")).listFiles()) {
+        for (File file: new File(ReadConfigProp.value("pathImage")).listFiles()) {
             System.out.println(nameForDelete + " -- name for delete");
             if (nameForDelete.equals(file.getName())) {
                 fileToDelete = file.getAbsoluteFile();
@@ -24,8 +24,8 @@ public class DeleteCandidateServlet extends HttpServlet {
                 MemStore.instOf().deleteCandidate(Integer.parseInt(nameForDelete));
                 Files.delete(fileToDelete.toPath());
                 System.out.println("DeleteCandidateServlet  IF");
+                break;
             }
-            break;
         }
         resp.sendRedirect(req.getContextPath() + "/candidates.do");
     }

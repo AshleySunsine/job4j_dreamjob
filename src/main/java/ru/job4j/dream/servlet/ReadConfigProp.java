@@ -5,16 +5,10 @@ import java.io.FileReader;
 import java.util.*;
 
 public class ReadConfigProp {
-    private static final ReadConfigProp INST = new ReadConfigProp("./resources/dream.properties");
-    private String path;
-    private final Map<String, String> values = new HashMap<>();
+    private static String path = "./resources/dream.properties";
+    private static final Map<String, String> VALUES = new HashMap<>();
 
-    public ReadConfigProp(final String path) {
-        this.path = path;
-        this.load();
-    }
-
-    private void load() {
+    private static void load() {
         try (BufferedReader read = new BufferedReader(new FileReader(path))) {
             String line = read.readLine();
             while (line != null) {
@@ -24,7 +18,7 @@ public class ReadConfigProp {
                 }
                 if (!line.startsWith("#")) {
                     int inx = line.indexOf("=");
-                    values.put(line.substring(0, inx), line.substring(inx + 1));
+                    VALUES.put(line.substring(0, inx), line.substring(inx + 1));
                 }
                     line = read.readLine();
             }
@@ -34,11 +28,10 @@ public class ReadConfigProp {
         }
     }
 
-    public String value(String key) {
-        return values.getOrDefault(key, null);
+    public static String value(String key) {
+        ReadConfigProp.load();
+        return VALUES.getOrDefault(key, null);
     }
 
-    public static ReadConfigProp getInstance() {
-        return INST;
-    }
+
 }

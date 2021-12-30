@@ -14,14 +14,14 @@ public class DeleteServlet extends HttpServlet {
         File fileToDelete;
         String nameForDelete = req.getParameter("id");
         System.out.println("****** - DeleteServlet  nameForDelete " + nameForDelete);
-        for (File file: new File(ReadConfigProp.getInstance().value("pathImage")).listFiles()) {
+        for (File file: new File(ReadConfigProp.value("pathImage")).listFiles()) {
             System.out.println("****** - DeleteServlet file.getName() " + file.getName());
             if (nameForDelete.equals(file.getName())) {
                 System.out.println("DeleteServlet  IF");
                 fileToDelete = file.getAbsoluteFile();
                 Files.delete(fileToDelete.toPath());
+                break;
             }
-            break;
         }
         resp.sendRedirect(req.getContextPath() + "/candidates.do");
     }

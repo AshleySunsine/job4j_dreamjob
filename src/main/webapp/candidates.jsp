@@ -48,18 +48,18 @@
                            </a>
                            <c:out value="${candidate.name}"/>
                            <c:out value="${candidate.id}"/>
-                           <img src="<c:url value='/download?name=${candidate.id}'/>" width="100px" height="100px"/>
+                           <img src="<c:url value='/download?name=${candidate.id}.jpg'/>" width="100px" height="100px"/>
 
                            <td>
-                           <form action="<c:url value='/candidate/PhotoUpload.jsp?id=${candidate.id}'/>" method="post" enctype="multipart/form-data">
+                           <form action="<c:url value='/candidate/PhotoUpload.jsp?id=${candidate.id}.jpg'/>" method="post" enctype="multipart/form-data">
                                  <button type="submit" class="btn btn-default">Добавить</button>
                            </form>
 
-                           <form action="<c:url value='/deleteImage?id=${candidate.id}'/>" method="post" enctype="multipart/form-data">
+                           <form action="<c:url value='/deleteImage?id=${candidate.id}.jpg'/>" method="post" enctype="multipart/form-data">
                                 <button type="submit" class="btn btn-default">Удалить фото</button>
                             </form>
 
-                           <form action="<c:url value='/DeleteCandidate?id=${candidate.id}'/>" method="post" enctype="multipart/form-data">
+                           <form action="<c:url value='/DeleteCandidate?id=${candidate.id}.jpg'/>" method="post" enctype="multipart/form-data">
                              <button type="submit" class="btn btn-default">Удалить кандидата</button>
                            </form>
 
