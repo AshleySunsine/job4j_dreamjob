@@ -21,7 +21,10 @@ public class DeleteCandidateServlet extends HttpServlet {
             if (nameForDelete.equals(file.getName())) {
                 fileToDelete = file.getAbsoluteFile();
                 System.out.println(file.getName());
-                MemStore.instOf().deleteCandidate(Integer.parseInt(nameForDelete));
+                MemStore.instOf().deleteCandidate(
+                        Integer.parseInt(
+                        nameForDelete.split("\\.")[0]
+                ));
                 Files.delete(fileToDelete.toPath());
                 System.out.println("DeleteCandidateServlet  IF");
                 break;
