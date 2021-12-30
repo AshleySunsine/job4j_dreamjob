@@ -5,11 +5,11 @@ import ru.job4j.dream.model.Post;
 public class MainStore {
     public static void main(String[] args) {
         Store store = DbStore.instOf();
-        store.save(new Post(0, "Java Job"));
+        store.savePost(new Post(0, "Java Job"));
         for (Post post : store.findAllPosts()) {
             System.out.println(post.getId() + " " + post.getName());
         }
-        store.save(new Post(1, "Jaga-Jaga Job"));
-        System.out.println(store.findById(1).getId() + " " + store.findById(1).getName());
+        store.savePost(new Post(1, "Jaga-Jaga Job"));
+        System.out.println(store.findByIdPost(1).getId() + " " + store.findByIdPost(1).getName());
     }
 }
