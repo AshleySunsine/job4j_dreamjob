@@ -1,8 +1,7 @@
 package ru.job4j.dream.servlet;
 
-import ru.job4j.dream.store.MemStore;
+import ru.job4j.dream.store.DbStore;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,15 +20,13 @@ public class DeleteCandidateServlet extends HttpServlet {
             if (nameForDelete.equals(file.getName())) {
                 fileToDelete = file.getAbsoluteFile();
                 System.out.println(file.getName());
-                MemStore.instOf().deleteCandidate(
-                        Integer.parseInt(
-                        nameForDelete.split("\\.")[0]
-                ));
                 Files.delete(fileToDelete.toPath());
-                System.out.println("DeleteCandidateServlet  IF");
                 break;
             }
         }
+        DbStore.instOf().deleteCandidate(
+                Integer.parseInt(
+                        nameForDelete.split("\\.")[0]));
         resp.sendRedirect(req.getContextPath() + "/candidates.do");
     }
 }
