@@ -26,8 +26,8 @@ public class DbStoreTest {
         Store store = DbStore.instOf();
         Candidate candidate = new Candidate(0, "Java Job");
         store.saveCandidate(candidate);
-        Candidate postInDb = store.findByIdCandidate(candidate.getId());
-        assertThat(postInDb.getName(), is(candidate.getName()));
+        Candidate CandidateInDb = store.findByIdCandidate(candidate.getId());
+        assertThat(CandidateInDb.getName(), is(candidate.getName()));
     }
 
     @Test
