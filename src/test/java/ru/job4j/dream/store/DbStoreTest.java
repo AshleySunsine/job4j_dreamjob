@@ -22,15 +22,6 @@ public class DbStoreTest {
     }
 
     @Test
-    public void whenCreateCandidates() {
-        Store store = DbStore.instOf();
-        Candidate candidate = new Candidate(0, "Java Job");
-        store.saveCandidate(candidate);
-        Candidate candidateInDb = store.findByIdCandidate(candidate.getId());
-        assertThat(candidateInDb.getName(), is(candidate.getName()));
-    }
-
-    @Test
     public void whenDeletePost() {
         Store store = DbStore.instOf();
         Post post = new Post(0, "Java Job");
@@ -38,6 +29,33 @@ public class DbStoreTest {
         store.deletePost(post.getId());
         Post postInDb = store.findByIdPost(post.getId());
         assertNull(postInDb);
+    }
+
+    @Test
+    public void findByIdPost() {
+        Store store = DbStore.instOf();
+        Post post = new Post(0, "Java Job");
+        store.savePost(post);
+        Post candidateInDb = store.findByIdPost(post.getId());
+        assertEquals(candidateInDb, post);
+    }
+    /**
+    @Test
+    public void findByIdCandidate() {
+        Store store = DbStore.instOf();
+        Candidate candidate = new Candidate(0, "Java Job");
+        store.saveCandidate(candidate);
+        Candidate candidateInDb = store.findByIdCandidate(candidate.getId());
+        assertEquals(candidateInDb, candidate);
+    }
+
+    @Test
+    public void whenCreateCandidates() {
+        Store store = DbStore.instOf();
+        Candidate candidate = new Candidate(0, "Java Job");
+        store.saveCandidate(candidate);
+        Candidate candidateInDb = store.findByIdCandidate(candidate.getId());
+        assertThat(candidateInDb.getName(), is(candidate.getName()));
     }
 
     @Test
@@ -49,24 +67,5 @@ public class DbStoreTest {
         Candidate candidateInDb = store.findByIdCandidate(candidate.getId());
         assertNull(candidateInDb);
     }
-
-    @Test
-    public void findByIdPost() {
-        Store store = DbStore.instOf();
-        Post post = new Post(0, "Java Job");
-        store.savePost(post);
-        Post candidateInDb = store.findByIdPost(post.getId());
-        assertEquals(candidateInDb, post);
-    }
-    
-    @Test
-    public void findByIdCandidate() {
-        Store store = DbStore.instOf();
-        Candidate candidate = new Candidate(0, "Java Job");
-        store.saveCandidate(candidate);
-        Candidate candidateInDb = store.findByIdCandidate(candidate.getId());
-        assertEquals(candidateInDb, candidate);
-    }
-    
-    
+    **/
 }
