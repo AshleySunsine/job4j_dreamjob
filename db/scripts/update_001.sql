@@ -8,4 +8,4 @@ DROP TABLE IF EXISTS candidate;
 CREATE TABLE candidate (
    id SERIAL PRIMARY KEY,
    name TEXT
-);
+); 
