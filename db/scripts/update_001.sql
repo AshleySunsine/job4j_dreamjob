@@ -1,0 +1,11 @@
+DROP TABLE IF EXISTS post;
+CREATE TABLE post (
+   id SERIAL PRIMARY KEY,
+   name TEXT
+);
+
+DROP TABLE IF EXISTS candidate;
+CREATE TABLE candidate (
+   id SERIAL PRIMARY KEY,
+   name TEXT
+);
