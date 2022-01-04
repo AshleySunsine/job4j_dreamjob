@@ -3,8 +3,6 @@ package ru.job4j.dream.store;
 import org.junit.Test;
 import ru.job4j.dream.model.Post;
 import ru.job4j.dream.model.Candidate;
-import ru.job4j.dream.store.DbStore;
-import ru.job4j.dream.store.Store;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
