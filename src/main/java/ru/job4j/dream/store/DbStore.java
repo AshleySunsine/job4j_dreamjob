@@ -32,12 +32,12 @@ public class DbStore implements Store {
         )) {
             cfg.load(io);
         } catch (Exception e) {
-            LOG.error(e.getMessage());
+            LOG.error(e.getMessage(), e);
         }
         try {
             Class.forName(cfg.getProperty("jdbc.driver"));
         } catch (Exception e) {
-            LOG.error(e.getMessage());
+            LOG.error(e.getMessage(), e);
         }
         pool.setDriverClassName(cfg.getProperty("jdbc.driver"));
         pool.setUrl(cfg.getProperty("jdbc.url"));
@@ -67,7 +67,7 @@ public class DbStore implements Store {
                 }
             }
         } catch (Exception e) {
-            LOG.error(e.getMessage());
+            LOG.error(e.getMessage(), e);
         }
         return posts;
     }
@@ -85,7 +85,7 @@ public class DbStore implements Store {
             ps.setInt(1, id);
             ps.execute();
         } catch (Exception e) {
-            LOG.error(e.getMessage());
+            LOG.error(e.getMessage(), e);
         }
     }
 
@@ -102,7 +102,7 @@ public class DbStore implements Store {
                 }
             }
         } catch (Exception e) {
-            LOG.error(e.getMessage());
+            LOG.error(e.getMessage(), e);
         }
         return post;
     }
@@ -115,7 +115,7 @@ public class DbStore implements Store {
                     ps.setInt(2, post.getId());
                     ps.execute();
                  } catch (Exception e) {
-            LOG.error(e.getMessage());
+            LOG.error(e.getMessage(), e);
                  }
     }
 
@@ -130,7 +130,7 @@ public class DbStore implements Store {
                 }
             }
         } catch (Exception e) {
-            LOG.error(e.getMessage());
+            LOG.error(e.getMessage(), e);
         }
         return null;
     }
@@ -145,7 +145,7 @@ public class DbStore implements Store {
                 }
             }
         } catch (Exception e) {
-            LOG.error(e.getMessage());
+            LOG.error(e.getMessage(), e);
         }
         return candidates;
     }
@@ -164,7 +164,7 @@ public class DbStore implements Store {
             ps.setInt(1, id);
             ps.execute();
         } catch (Exception e) {
-            LOG.error(e.getMessage());
+            LOG.error(e.getMessage(), e);
         }
     }
 
@@ -181,7 +181,7 @@ public class DbStore implements Store {
                 }
             }
         } catch (Exception e) {
-            LOG.error(e.getMessage());
+            LOG.error(e.getMessage(), e);
         }
         return candidate;
     }
@@ -194,7 +194,7 @@ public class DbStore implements Store {
             ps.setInt(2, candidate.getId());
             ps.execute();
         } catch (Exception e) {
-            LOG.error(e.getMessage());
+            LOG.error(e.getMessage(), e);
         }
     }
 
@@ -209,7 +209,7 @@ public class DbStore implements Store {
                 }
             }
         } catch (Exception e) {
-            LOG.error(e.getMessage());
+            LOG.error(e.getMessage(), e);
         }
         return null;
     }
