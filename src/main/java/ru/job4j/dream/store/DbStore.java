@@ -107,6 +107,24 @@ public class DbStore implements Store {
         return post;
     }
 
+    private Candidate createCandidate(Candidate candidate) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps =  cn.prepareStatement("INSERT INTO candidate(name) VALUES (?)",
+                     PreparedStatement.RETURN_GENERATED_KEYS)
+        ) {
+            ps.setString(1, candidate.getName());
+            ps.execute();
+            try (ResultSet id = ps.getGeneratedKeys()) {
+                if (id.next()) {
+                    candidate.setId(id.getInt(1));
+                }
+            }
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return candidate;
+    }
+
     private void updatePost(Post post) {
         try (Connection cn = pool.getConnection();
             PreparedStatement ps = cn.prepareStatement("UPDATE post SET "
@@ -115,24 +133,25 @@ public class DbStore implements Store {
                     ps.setInt(2, post.getId());
                     ps.execute();
                  } catch (Exception e) {
-            LOG.error(e.getMessage(), e);
+                        LOG.error(e.getMessage(), e);
                  }
     }
 
     public Post findByIdPost(int id) {
+        Post p = null;
         try (Connection cn = pool.getConnection();
              PreparedStatement ps =  cn.prepareStatement("SELECT * FROM post WHERE id = (?)")
         ) {
             ps.setInt(1, id);
             try (ResultSet it = ps.executeQuery()) {
                 if (it.next()) {
-                    return new Post(it.getInt("id"), it.getString("name"));
+                    p = new Post(it.getInt("id"), it.getString("name"));
                 }
             }
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
-        return null;
+        return p;
     }
 
     public Collection<Candidate> findAllCandidates() {
@@ -166,24 +185,6 @@ public class DbStore implements Store {
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
-    }
-
-    private Candidate createCandidate(Candidate candidate) {
-        try (Connection cn = pool.getConnection();
-             PreparedStatement ps =  cn.prepareStatement("INSERT INTO candidate(name) VALUES (?)",
-                     PreparedStatement.RETURN_GENERATED_KEYS)
-        ) {
-            ps.setString(1, candidate.getName());
-            ps.execute();
-            try (ResultSet id = ps.getGeneratedKeys()) {
-                if (id.next()) {
-                    candidate.setId(id.getInt(1));
-                }
-            }
-        } catch (Exception e) {
-            LOG.error(e.getMessage(), e);
-        }
-        return candidate;
     }
 
     private void updateCandidate(Candidate candidate) {
