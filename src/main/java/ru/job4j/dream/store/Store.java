@@ -21,4 +21,6 @@ public interface Store {
     Candidate findByIdCandidate(int id);
 
     void deleteCandidate(int id);
+
+
 }
