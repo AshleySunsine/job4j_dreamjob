@@ -40,12 +40,18 @@
                     <button type="submit" class="btn btn-primary">Войти</button>
                     <c:if test="${not empty error}">
                         <div style="color:red; font-weight: bold; margin: 30px 0;">
-                            <c:out value="${error}"/>
+                    <c:out value="${error}"/>
                         </div>
                     </c:if>
                 </form>
+
+                    <form action="<%=request.getContextPath()%>/reg.do" method="get">
+                         <button type="submit" class="btn btn-primary">Регистрация</button>
+                    </form>
             </div>
         </div>
+
+
     </div>
 </div>
 </body>

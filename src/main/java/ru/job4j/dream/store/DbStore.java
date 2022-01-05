@@ -14,8 +14,9 @@ import java.util.List;
 import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.job4j.dream.model.User;
 
-public class DbStore implements Store {
+public class DbStore implements Store, StoreWithUser {
     private static final DbStore INSTANCE = new DbStore();
 
     private final BasicDataSource pool = new BasicDataSource();
@@ -213,5 +214,75 @@ public class DbStore implements Store {
             LOG.error(e.getMessage(), e);
         }
         return null;
+    }
+
+    @Override
+    public void saveUser(User user) {
+
+    }
+
+    private void createUser(User user) {
+        try (Connection cn = pool.getConnection();
+        PreparedStatement ps = cn.prepareStatement("INSERT INTO users(name,email,password) VALUES (?),(?),(?)")) {
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getPassword());
+            try (ResultSet rs = ps.executeQuery()) {
+                user.setId(rs.getInt("id"));
+            }
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public void deleteUser(int id) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("DELETE FROM users WHERE id = (?)")) {
+            ps.setInt(1, id);
+            ps.execute();
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public User findUserByEmail(int id) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps =  cn.prepareStatement("SELECT * FROM users WHERE id = (?)")
+        ) {
+            ps.setInt(1, id);
+            try (ResultSet it = ps.executeQuery()) {
+                if (it.next()) {
+                    return new User(it.getInt("id"), it.getString("name"),
+                            it.getString("email"), it.getString("password"));
+                }
+            }
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return null;
+    }
+
+    @Override
+    public Collection<User> findAllUser() {
+        List<User> users = new ArrayList<>();
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("SELECT * FROM users")) {
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    users.add(new User(rs.getInt("id"), rs.getString("name"),
+                            rs.getString("email"), rs.getString("password")));
+                }
+            }
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return users;
+    }
+
+    @Override
+    public void setUser(int id) {
+
     }
 }
