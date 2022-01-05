@@ -11,8 +11,12 @@ public interface StoreWithUser extends Store {
 
     User findUserById(int id);
 
+    User findUserByEmail(int id);
+
     Collection<User> findAllUser();
 
     void setUser(int id);
+
+
 
 }
