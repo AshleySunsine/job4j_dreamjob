@@ -25,8 +25,19 @@
     <title>Работа мечты</title>
 </head>
 <body>
-<div class="container pt-3">
 
+<div class="container">
+    <div class="row">
+        <ul class="nav">
+        <c:if test="${user != null}">
+           <li class="nav-item">
+               <a class="nav-link" href="<%=request.getContextPath()%>/logout.do">Выйти</a>
+            </li>
+         </c:if>
+        </ul>
+    </div>
+
+<div class="container pt-3">
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">

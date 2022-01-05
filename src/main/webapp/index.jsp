@@ -39,6 +39,12 @@
             <li class="nav-item">
                 <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp">Войти</a>
             </li>
+            <c:if test="${user != null}">
+                           <li class="nav-item">
+                               <a class="nav-link" href="<%=request.getContextPath()%>/logout.do">Выйти</a>
+                           </li>
+           </c:if>
+
         </ul>
     </div>
     <div class="row">
