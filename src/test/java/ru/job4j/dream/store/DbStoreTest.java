@@ -39,6 +39,7 @@ public class DbStoreTest {
         Post candidateInDb = store.findByIdPost(post.getId());
         assertEquals(candidateInDb, post);
     }
+
     /**
     @Test
     public void findByIdCandidate() {
@@ -66,6 +67,5 @@ public class DbStoreTest {
         store.deleteCandidate(candidate.getId());
         Candidate candidateInDb = store.findByIdCandidate(candidate.getId());
         assertNull(candidateInDb);
-    }
-    **/
+    }**/
 }
