@@ -50,10 +50,10 @@ public class DbStore implements Store, StoreWithUser {
     }
 
     private static final class Lazy {
-        private static final Store INST = new DbStore();
+        private static final StoreWithUser INST = new DbStore();
     }
 
-    public static Store instOf() {
+    public static StoreWithUser instOf() {
         return Lazy.INST;
     }
 
@@ -218,18 +218,40 @@ public class DbStore implements Store, StoreWithUser {
 
     @Override
     public void saveUser(User user) {
-
+        if (user.getId() == 0) {
+            createUser(user);
+        } else {
+            updateUser(user);
+        }
     }
 
     private void createUser(User user) {
         try (Connection cn = pool.getConnection();
-        PreparedStatement ps = cn.prepareStatement("INSERT INTO users(name,email,password) VALUES (?),(?),(?)")) {
+        PreparedStatement ps = cn.prepareStatement("INSERT INTO users(name,email,password) VALUES (?,?,?)")) {
             ps.setString(1, user.getName());
             ps.setString(2, user.getEmail());
             ps.setString(3, user.getPassword());
-            try (ResultSet rs = ps.executeQuery()) {
-                user.setId(rs.getInt("id"));
+            ps.execute();
+            try (ResultSet id = ps.getGeneratedKeys()) {
+                if (id.next()) {
+                    user.setId(id.getInt(1));
+                }
             }
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public void updateUser(User user) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("UPDATE users SET "
+                     + "name=(?), email=(?), password=(?) WHERE id=(?)")) {
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getPassword());
+            ps.setInt(4, user.getId());
+            ps.execute();
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
@@ -247,11 +269,11 @@ public class DbStore implements Store, StoreWithUser {
     }
 
     @Override
-    public User findUserByEmail(int id) {
+    public User findUserByEmail(String email) {
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps =  cn.prepareStatement("SELECT * FROM users WHERE id = (?)")
+             PreparedStatement ps =  cn.prepareStatement("SELECT * FROM users WHERE email = (?)")
         ) {
-            ps.setInt(1, id);
+            ps.setString(1, email);
             try (ResultSet it = ps.executeQuery()) {
                 if (it.next()) {
                     return new User(it.getInt("id"), it.getString("name"),
@@ -279,10 +301,5 @@ public class DbStore implements Store, StoreWithUser {
             LOG.error(e.getMessage(), e);
         }
         return users;
-    }
-
-    @Override
-    public void setUser(int id) {
-
     }
 }

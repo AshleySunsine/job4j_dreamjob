@@ -45,13 +45,11 @@
                     </c:if>
                 </form>
 
-                    <form action="<%=request.getContextPath()%>/reg.do" method="get">
+                    <form action="<%=request.getContextPath()%>/reg.jsp" method="get">
                          <button type="submit" class="btn btn-primary">Регистрация</button>
                     </form>
             </div>
         </div>
-
-
     </div>
 </div>
 </body>

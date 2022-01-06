@@ -19,53 +19,39 @@
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
     <title>Работа мечты</title>
-</head>
-<body>
-<div class="container">
-    <div class="row">
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link" href="<%=request.getContextPath()%>/posts.do">Вакансии</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<%=request.getContextPath()%>/candidates.do">Кандидаты</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<%=request.getContextPath()%>/post/edit.jsp">Добавить вакансию</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<%=request.getContextPath()%>/candidate/edit.jsp">Добавить резюме</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp">Войти</a>
-            </li>
-            <c:if test="${user != null}">
-                           <li class="nav-item">
-                               <a class="nav-link" href="<%=request.getContextPath()%>/logout.do">Выйти</a>
-                           </li>
-           </c:if>
+   </head>
+   <body>
+   <div class="container pt-3">
 
-
-        </ul>
-    </div>
-    <div class="row">
-        <div class="card" style="width: 100%">
-            <div class="card-header">
-                Сегодняшние вакансии.
-            </div>
-            <div class="card-body">
-            </div>
-        </div>
-    </div>
-    <div class="row pt-3">
-        <div class="card" style="width: 100%">
-            <div class="card-header">
-                Сегодняшние кандидаты.
-            </div>
-            <div class="card-body">
-            </div>
-        </div>
-    </div>
-</div>
-</body>
-</html>
+       <div class="row">
+           <div class="card" style="width: 100%">
+               <div class="card-header">
+                   Регистрация
+               </div>
+               <div class="card-body">
+                   <form action="<%=request.getContextPath()%>/reg.do" method="get">
+                       <div class="form-group">
+                           <label>Имя</label>
+                           <input type="text" class="form-control" name="name">
+                       </div>
+                       <div class="form-group">
+                           <label>Почта</label>
+                           <input type="text" class="form-control" name="email">
+                       </div>
+                       <div class="form-group">
+                           <label>Пароль</label>
+                           <input type="text" class="form-control" name="password">
+                       </div>
+                       <button type="submit" class="btn btn-primary">Зарегистрировать</button>
+                       <c:if test="${not empty error}">
+                                               <div style="color:red; font-weight: bold; margin: 30px 0;">
+                                           <c:out value="${error}"/>
+                                               </div>
+                                           </c:if>
+                   </form>
+               </div>
+           </div>
+       </div>
+   </div>
+   </body>
+   </html>

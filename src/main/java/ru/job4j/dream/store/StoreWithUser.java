@@ -9,12 +9,9 @@ public interface StoreWithUser extends Store {
 
     void deleteUser(int id);
 
-    User findUserByEmail(int id);
+    User findUserByEmail(String email);
 
     Collection<User> findAllUser();
 
-    void setUser(int id);
-
-
-
+    void updateUser(User user);
 }
