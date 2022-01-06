@@ -155,6 +155,23 @@ public class DbStore implements Store, StoreWithUser {
         return p;
     }
 
+    public Post findByNamePost(String name) {
+        Post p = null;
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps =  cn.prepareStatement("SELECT * FROM post WHERE name = (?)")
+        ) {
+            ps.setString(1, name);
+            try (ResultSet it = ps.executeQuery()) {
+                if (it.next()) {
+                    p = new Post(it.getInt("id"), it.getString("name"));
+                }
+            }
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return p;
+    }
+
     public Collection<Candidate> findAllCandidates() {
         List<Candidate> candidates = new ArrayList<>();
         try (Connection cn = pool.getConnection();
@@ -205,6 +222,22 @@ public class DbStore implements Store, StoreWithUser {
              PreparedStatement ps =  cn.prepareStatement("SELECT * FROM candidate WHERE id = (?)")
         ) {
             ps.setInt(1, id);
+            try (ResultSet it = ps.executeQuery()) {
+                if (it.next()) {
+                    return new Candidate(it.getInt("id"), it.getString("name"));
+                }
+            }
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return null;
+    }
+
+    public Candidate findByNameCandidate(String name) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps =  cn.prepareStatement("SELECT * FROM candidate WHERE name = (?)")
+        ) {
+            ps.setString(1, name);
             try (ResultSet it = ps.executeQuery()) {
                 if (it.next()) {
                     return new Candidate(it.getInt("id"), it.getString("name"));

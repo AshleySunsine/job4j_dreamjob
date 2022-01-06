@@ -10,6 +10,10 @@ public interface Store {
 
     Collection<Candidate> findAllCandidates();
 
+    Candidate findByNameCandidate(String name);
+
+    Post findByNamePost(String name);
+
     void savePost(Post post);
 
     void deletePost(int id);
@@ -21,6 +25,5 @@ public interface Store {
     Candidate findByIdCandidate(int id);
 
     void deleteCandidate(int id);
-
 
 }
