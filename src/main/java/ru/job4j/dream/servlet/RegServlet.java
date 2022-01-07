@@ -16,19 +16,15 @@ public class RegServlet extends HttpServlet {
         String name = req.getParameter("name");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        if ((name != null)
-            && (email != null)
-            && (password != null)
-            && !name.isEmpty()
-            && !email.isEmpty()
-            && !password.isEmpty()) {
+        User user = DbStore.instOf().findUserByEmail(req.getParameter("email"));
+        if (user == null) {
                 DbStore.instOf().saveUser(
                         new User(0, name, email, password));
                 System.out.println("RegServlet work");
                 System.out.println(DbStore.instOf().findUserByEmail(req.getParameter("email")));
                 req.getRequestDispatcher("login.jsp").forward(req, resp);
         } else {
-            req.setAttribute("error", "Не верный email или пароль");
+            req.setAttribute("error", "Такой email уже существует");
             req.getRequestDispatcher("reg.jsp").forward(req, resp);
         }
     }

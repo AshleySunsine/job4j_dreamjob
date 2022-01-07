@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.dream.store.Store" %>
 <%@ page import="ru.job4j.dream.model.Post" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -32,22 +33,23 @@
                    <form action="<%=request.getContextPath()%>/reg.do" method="get">
                        <div class="form-group">
                            <label>Имя</label>
-                           <input type="text" class="form-control" name="name">
+                           <input required type="text" class="form-control" name="name">
                        </div>
                        <div class="form-group">
                            <label>Почта</label>
-                           <input type="text" class="form-control" name="email">
+                           <input required type="text" class="form-control" name="email">
                        </div>
                        <div class="form-group">
                            <label>Пароль</label>
-                           <input type="text" class="form-control" name="password">
+                           <input required type="text" class="form-control" name="password">
                        </div>
-                       <button type="submit" class="btn btn-primary">Зарегистрировать</button>
                        <c:if test="${not empty error}">
                                                <div style="color:red; font-weight: bold; margin: 30px 0;">
-                                           <c:out value="${error}"/>
+                                               <c:out value="${error}"/>
                                                </div>
-                                           </c:if>
+                                               </c:if>
+                       <button type="submit" class="btn btn-primary">Зарегистрировать</button>
+
                    </form>
                </div>
            </div>
