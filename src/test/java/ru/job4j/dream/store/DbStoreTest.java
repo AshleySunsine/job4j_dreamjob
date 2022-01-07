@@ -40,7 +40,7 @@ public class DbStoreTest {
         assertEquals(candidateInDb, post);
     }
 
-    /**
+
     @Test
     public void findByIdCandidate() {
         Store store = DbStore.instOf();
@@ -67,5 +67,5 @@ public class DbStoreTest {
         store.deleteCandidate(candidate.getId());
         Candidate candidateInDb = store.findByIdCandidate(candidate.getId());
         assertNull(candidateInDb);
-    }**/
+    }
 }
