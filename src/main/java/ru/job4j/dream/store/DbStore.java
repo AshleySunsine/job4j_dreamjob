@@ -64,7 +64,8 @@ public class DbStore implements Store, StoreWithUser {
         ) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
-                    posts.add(new Post(it.getInt("id"), it.getString("name")));
+                    posts.add(new Post(it.getInt("id"),
+                            it.getString("name")));
                 }
             }
         } catch (Exception e) {
