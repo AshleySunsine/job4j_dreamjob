@@ -123,4 +123,14 @@
     <servlet-name>GreetingServlet</servlet-name>
     <url-pattern>/greet</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <servlet-name>GreetingServletSecond</servlet-name>
+    <servlet-class>ru.job4j.dream.servlet.GreetingServletSecond</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>GreetingServletSecond</servlet-name>
+    <url-pattern>/greetSecond</url-pattern>
+  </servlet-mapping>
 </web-app>

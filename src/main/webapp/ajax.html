@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <!-- Required meta tags -->
@@ -21,6 +21,20 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
 <script>
+$(document).ready(function () {
+    $.ajax({
+        type: 'GET',
+        url: 'http://localhost:8080/items/greet',
+        dataType: 'json'
+    }).done(function (data) {
+        for (var email of data) {
+            $('#emailList li:last').append(`<li>${email.name}</li>`)
+        }
+    }).fail(function (err) {
+        console.log(err);
+    });
+});
+
 function sendGreeting() {
         $.ajax({
             type: 'GET',
@@ -34,6 +48,21 @@ function sendGreeting() {
             alert(err);
         });
     }
+
+    function sendGreetingSecond() {
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost:8080/dreamjob/greetSecond',
+        data: JSON.stringify({
+            name: $('#email').val()
+        }),
+        dataType: 'json'
+    }).done(function (data) {
+        $('#emailList li:last').append(`<li>${data.name}</li>`)
+    }).fail(function (err) {
+        console.log(err);
+    });
+}
 </script>
 <body>
 <div class="container" >
@@ -43,7 +72,15 @@ function sendGreeting() {
             <input type="text" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
         </div>
         <button type="button" class="btn btn-primary" onclick="sendGreeting()">Submit</button>
+        <button type="button" class="btn btn-primary" onclick="sendGreetingSecond()">
+            Кнопка для задания 4.1. JSON формат. [#238554]01
+        </button>
     </form>
+    <br>
+    Почты:
+    <ul id="emailList">
+        <li></li>
+    </ul>
 </div>
 </body>
 </html>
