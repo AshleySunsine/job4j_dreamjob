@@ -22,7 +22,6 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
 <script>
 function sendGreeting() {
-
         $.ajax({
             type: 'GET',
             url: 'http://localhost:8080/dreamjob/greet',
@@ -30,7 +29,6 @@ function sendGreeting() {
             dataType: 'text'
         }).done(function(data) {
             var cont = document.getElementById('cont');
-            alert(cont);
             cont.insertAdjacentHTML('beforebegin', '<h2>' + document.getElementById('email').value + '</h2>');
         }).fail(function(err){
             alert(err);
