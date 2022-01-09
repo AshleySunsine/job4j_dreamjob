@@ -7,55 +7,70 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        function validate() {
+        var name = document.getElementById('inputName').value;
+        var surName = document.getElementById('inputSurname').value;
+        var text = document.getElementById('textArea1').value;
+        if (name == '') {
+        alert('Заполните поле name');
+        }
+        if (surName == '') {
+        alert('Заполните поле surName');
+        }
+        if (text == '') {
+        alert('Заполните поле Text');
+        }
+        }
+    </script>
 </head>
 <body>
-
 <div class="container-fluid">
     <h2>1. index.html + bootstrap, form, table [#58522]</h2>
 </div>
 <form>
     <div class="col-md-4">
     <div class="form-group">
-        <label for="exampleInputEmail1">Имя</label>
-        <input type="text" class="form-control" id="exampleInputEmail1">
+        <label for="inputName">Имя</label>
+        <input type="text" class="form-control" id="inputName">
         <small class="form-text text-muted">Введите Ваше имя</small>
 
     <div class="form-group">
-        <label for="exampleInputPassword1">Фамилия</label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
+        <label for="inputSurname">Фамилия</label>
+        <input type="text" class="form-control" id="inputSurname">
         <small class="form-text text-muted">Введите Вашу фамилию</small>
     </div>
     <h1></h1>
 
     <div class="form-group">
-    <label for="exampleInputEmail1">Пол</label>
+    <label for="Radios1">Пол</label>
     <div class="form-check">
-        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-        <label class="form-check-label" for="exampleRadios1">
+        <input class="form-check-input" type="radio" name="exampleRadios" id="Radios1" value="option1" checked>
+        <label class="form-check-label" for="Radios1">
             Мужской
         </label>
     </div>
     <div class="form-check">
-        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-        <label class="form-check-label" for="exampleRadios2">
+        <input class="form-check-input" type="radio" name="exampleRadios" id="Radios2" value="option2">
+        <label class="form-check-label" for="Radios2">
             Женский
         </label>
     </div>
     </div>
     <h1></h1>
     <div class="form-group">
-        <label for="exampleFormControlTextarea1">Описание</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <label for="textArea1">Описание</label>
+        <textarea class="form-control" id="textArea1" rows="3"></textarea>
     </div>
-    <button type="submit" class="btn btn-primary">Отправить</button>
+    <button type="button" class="btn btn-primary" onclick="return validate();">Отправить</button>
     </div>
 <div>
 
 <table class="table table-striped table-dark">
     <thead>
     <tr>
-        <th scope="col" >#</th>
-        <th scope="col" >First</th>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
         <th scope="col">Last</th>
         <th scope="col">Handle</th>
     </tr>
