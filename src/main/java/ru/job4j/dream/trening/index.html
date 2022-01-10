@@ -9,9 +9,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>
     function validate() {
-        var name = document.getElementById('inputName').value; //поле ИМЯ
-        var surName = document.getElementById('inputSurname').value; //поле ФАМИЛИЯ
-        var text = document.getElementById('textArea1').value; //поле ОПИСАНИЕ
+        var name = document.getElementById('inputName').value;
+        var surName = document.getElementById('inputSurname').value;
+        var text = document.getElementById('textArea1').value;
 
         let map = new Map();
 
@@ -33,8 +33,7 @@
 
     function addRow() {
         let map = validate();
-        const name = $('#usr').val();
-            //Здесь начинаем дорисовывать табличку.
+
         $('#table tr:last').after('<tr><th scope="row">#</th><td>'
         + map.get("name") + '</td><td>'
         + map.get("surName") + '</td><td>'
