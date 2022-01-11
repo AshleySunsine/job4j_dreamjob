@@ -18,7 +18,41 @@
             integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script>
+    function validate() {
+         var name =  document.getElementById('name').value;
+         var email = document.getElementById('email').value;
+         var password = document.getElementById('password').value;
+         if (name == '') {
+            alert('Заполните поле "Имя"');
+            } else if (email == '') {
+                 alert('Заполните поле "Почта"');
+                 } else if (password == '') {
+                    alert('Заполните поле "Пароль"');
+                    } else {
+                        let paramet = new Map();
+                        map.set("name", name);
+                        map.set("email", email);
+                        map.set("password", password);
+                        return map;
+                        }
 
+         return -1;
+        }
+
+        function sendToServlet() {
+        let params = validate();
+        if ((params != null) || (params != -1)) {
+            $.ajax({
+                  type: "POST",
+                  url: "http://localhost:8080/dreamjob/reg.do",
+                  data: { name: params.get("name"), email: params.get("email"), password: params.get("password") }
+                }).done(function( msg ) {
+                  alert( "Data Saved: " + msg );
+                });
+        }
+        }
+    </script>
     <title>Работа мечты</title>
    </head>
    <body>
@@ -33,22 +67,22 @@
                    <form action="<%=request.getContextPath()%>/reg.do" method="get">
                        <div class="form-group">
                            <label>Имя</label>
-                           <input required type="text" class="form-control" name="name">
+                           <input required type="text" class="form-control" name="name" id="name">
                        </div>
                        <div class="form-group">
                            <label>Почта</label>
-                           <input required type="text" class="form-control" name="email">
+                           <input required type="text" class="form-control" name="email" id="email">
                        </div>
                        <div class="form-group">
                            <label>Пароль</label>
-                           <input required type="text" class="form-control" name="password">
+                           <input required type="text" class="form-control" name="password" id="password">
                        </div>
                        <c:if test="${not empty error}">
                                                <div style="color:red; font-weight: bold; margin: 30px 0;">
                                                <c:out value="${error}"/>
                                                </div>
                                                </c:if>
-                       <button type="submit" class="btn btn-primary">Зарегистрировать</button>
+                       <button type="submit" class="btn btn-primary" onclick="sendToServlet()">Зарегистрировать</button>
 
                    </form>
                </div>

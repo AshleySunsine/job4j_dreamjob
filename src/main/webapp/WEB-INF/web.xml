@@ -8,7 +8,6 @@
     <servlet-name>PostServlet</servlet-name>
     <servlet-class>ru.job4j.dream.servlet.PostServlet</servlet-class>
   </servlet>
-
   <servlet-mapping>
     <servlet-name>PostServlet</servlet-name>
     <url-pattern>/posts.do</url-pattern>
@@ -18,7 +17,6 @@
     <servlet-name>CandidateServlet</servlet-name>
     <servlet-class>ru.job4j.dream.servlet.CandidateServlet</servlet-class>
   </servlet>
-
   <servlet-mapping>
     <servlet-name>CandidateServlet</servlet-name>
     <url-pattern>/candidates.do</url-pattern>
@@ -118,7 +116,6 @@
     <servlet-name>GreetingServlet</servlet-name>
     <servlet-class>ru.job4j.dream.servlet.GreetingServlet</servlet-class>
   </servlet>
-
   <servlet-mapping>
     <servlet-name>GreetingServlet</servlet-name>
     <url-pattern>/greet</url-pattern>
@@ -128,9 +125,17 @@
     <servlet-name>GreetingServletSecond</servlet-name>
     <servlet-class>ru.job4j.dream.servlet.GreetingServletSecond</servlet-class>
   </servlet>
-
   <servlet-mapping>
     <servlet-name>GreetingServletSecond</servlet-name>
     <url-pattern>/greetSecond</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>EditCandidateServlet</servlet-name>
+    <servlet-class>ru.job4j.dream.servlet.EditCandidateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditCandidateServlet</servlet-name>
+    <url-pattern>/candidate/edit.do</url-pattern>
   </servlet-mapping>
 </web-app>

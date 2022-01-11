@@ -6,11 +6,13 @@ import java.util.Objects;
 public class Candidate {
     private String name;
     private int id;
+    private int cityId;
     private List<Resume> resumeList;
 
-    public Candidate(int id, String name) {
+    public Candidate(int id, String name, int cityId) {
         this.name = name;
         this.id = id;
+        this.cityId = cityId;
     }
 
     public String getName() {
@@ -33,8 +35,19 @@ public class Candidate {
         return resumeList;
     }
 
+    public int getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(int cityId) {
+        this.cityId = cityId;
+    }
+
     public void setResumeList(List<Resume> resumeList) {
         this.resumeList = resumeList;
+
+
+
     }
 
 

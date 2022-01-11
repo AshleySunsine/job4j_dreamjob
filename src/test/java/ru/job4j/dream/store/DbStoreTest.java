@@ -44,7 +44,7 @@ public class DbStoreTest {
     @Test
     public void findByIdCandidate() {
         Store store = DbStore.instOf();
-        Candidate candidate = new Candidate(0, "Java Job");
+        Candidate candidate = new Candidate(0, "Java Job", 0);
         store.saveCandidate(candidate);
         Candidate candidateInDb = store.findByIdCandidate(candidate.getId());
         assertEquals(candidateInDb, candidate);
@@ -53,7 +53,7 @@ public class DbStoreTest {
     @Test
     public void whenCreateCandidates() {
         Store store = DbStore.instOf();
-        Candidate candidate = new Candidate(0, "Java Job");
+        Candidate candidate = new Candidate(0, "Java Job", 0);
         store.saveCandidate(candidate);
         Candidate candidateInDb = store.findByIdCandidate(candidate.getId());
         assertThat(candidateInDb.getName(), is(candidate.getName()));
@@ -62,7 +62,7 @@ public class DbStoreTest {
     @Test
     public void whenDeleteCandidate() {
         Store store = DbStore.instOf();
-        Candidate candidate = new Candidate(0, "Java Job");
+        Candidate candidate = new Candidate(0, "Java Job", 0);
         store.saveCandidate(candidate);
         store.deleteCandidate(candidate.getId());
         Candidate candidateInDb = store.findByIdCandidate(candidate.getId());

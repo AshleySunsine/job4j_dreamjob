@@ -4,7 +4,7 @@ import ru.job4j.dream.model.User;
 
 import java.util.Collection;
 
-public interface StoreWithUser extends Store {
+public interface StoreWithUser {
     void saveUser(User user);
 
     void deleteUser(int id);

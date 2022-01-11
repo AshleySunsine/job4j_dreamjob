@@ -14,7 +14,7 @@ public class MainStore {
         System.out.println(store.findByIdPost(1).getId() + " " + store.findByIdPost(1).getName());
 
 
-        store.saveCandidate(new Candidate(0, "Java Job Candidate"));
+        store.saveCandidate(new Candidate(0, "Java Job Candidate", 0));
         for (Candidate candidate : store.findAllCandidates()) {
             System.out.println(candidate.getId() + " " + candidate.getName());
         }

@@ -17,6 +17,37 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
+    <script>
+    function validate() {
+     var email = document.getElementById('email').value;
+     var password = document.getElementById('password').value;
+     if (email == '') {
+         alert('Заполните поле "Почта"');
+         } else if (password == '') {
+            alert('Заполните поле "Пароль"');
+            } else {
+                let paramet = new Map();
+                map.set("email", email);
+                map.set("password", password);
+                return map;
+                }
+
+     return -1;
+    }
+
+    function sendToServlet() {
+    let params = validate();
+    if (params != null) {
+        $.ajax({
+              type: "POST",
+              url: "http://localhost:8080/dreamjob/auth.do",
+              data: { name: params.get("name"), password: params.get("password") }
+            }).done(function( msg ) {
+              alert( "Data Saved: " + msg );
+            });
+    }
+    }
+    </script>
     <title>Работа мечты</title>
 </head>
 <body>
@@ -31,13 +62,13 @@
                 <form action="<%=request.getContextPath()%>/auth.do" method="post">
                     <div class="form-group">
                         <label>Почта</label>
-                        <input type="text" class="form-control" name="email">
+                        <input type="text" class="form-control" id="email" name="email">
                     </div>
                     <div class="form-group">
                         <label>Пароль</label>
-                        <input type="text" class="form-control" name="password">
+                        <input type="text" class="form-control" id="password" name="password">
                     </div>
-                    <button type="submit" class="btn btn-primary">Войти</button>
+                    <button type="submit" class="btn btn-primary" onclick="sendToServlet()">Войти</button>
                     <c:if test="${not empty error}">
                         <div style="color:red; font-weight: bold; margin: 30px 0;">
                     <c:out value="${error}"/>

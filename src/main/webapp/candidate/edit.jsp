@@ -2,6 +2,7 @@
 <%@ page import="ru.job4j.dream.store.Store" %>
 <%@ page import="ru.job4j.dream.store.DbStore" %>
 <%@ page import="ru.job4j.dream.model.Candidate" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -24,7 +25,7 @@
 <body>
 <%
     String id = request.getParameter("id");
-    Candidate candidate = new Candidate(0, "");
+    Candidate candidate = new Candidate(0, "", 0);
     if (id != null) {
         candidate =  DbStore.instOf().findByIdCandidate(Integer.valueOf(id));
     }
@@ -56,6 +57,17 @@
                     <div class="form-group">
                         <label>Имя</label>
                         <input type="text" class="form-control" name="nameOfCandidate" value="<%=candidate.getName()%>">
+                    </div>
+
+                    <div class="form-group">
+
+                    <label>Город</label>
+                    <select class="form-control" id="selectCity" name="cityId" value="${city.id}">
+                    <option>Выберите город</option>
+                    <c:forEach items="${cities}" var="city">
+                    <option><c:out value="${city.name}"/></option>
+                    </c:forEach>
+                    </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>

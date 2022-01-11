@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.dream.store.Store" %>
 <%@ page import="ru.job4j.dream.model.Candidate" %>
+<%@ page import="ru.job4j.dream.model.City" %>
 <%@ page import="java.util.Collection" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 
@@ -54,11 +55,17 @@
                     <c:forEach items="${candidates}" var="candidate">
                       <tr>
                         <td>
-                           <a href='<c:url value="/candidate/edit.jsp?id=${candidate.id}"/>'>
+                           <a href='<c:url value="/candidate/edit.do?id=${candidate.id}"/>'>
                             <i class="fa fa-edit mr-3"></i>
                            </a>
-                           <c:out value="${candidate.name}"/>
-                           <c:out value="${candidate.id}"/>
+                           Имя: <c:out value="${candidate.name}"/><br>
+                           <c:forEach items="${cities}" var="ci">
+                           <c:if test="${ci.id == candidate.cityId}">
+                           Город: <c:out value="${ci.name}"/><br>
+                           </c:if>
+                           </c:forEach>
+                           Id кандидата: <c:out value="${candidate.id}"/><br>
+                           Id города: <c:out value="${candidate.cityId}"/><br>
                            <img src="<c:url value='/download?name=${candidate.id}.jpg'/>" width="100px" height="100px"/>
 
                            <td>
