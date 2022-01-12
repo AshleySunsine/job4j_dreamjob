@@ -15,9 +15,7 @@ public class CandidateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         req.setCharacterEncoding("UTF-8");
-        System.out.println(req.getParameter("cityId"));
         City city = DbStore.instOf().findCityByName(req.getParameter("cityId"));
-        System.out.println(city.getName() + " ++++++");
         DbStore.instOf().saveCandidate(
                 new Candidate(
                         Integer.valueOf(req.getParameter("id")),

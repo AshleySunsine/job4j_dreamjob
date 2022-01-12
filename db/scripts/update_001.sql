@@ -18,3 +18,7 @@ CREATE TABLE If NOT EXISTS users (
    name TEXT,
    password TEXT
 );
+
+insert into city("name") values ('Moscow');
+insert into city("name") values ('Stalingrad');
+insert into city("name") values ('Uhta');

@@ -394,5 +394,4 @@ public class DbStore implements Store, StoreWithUser, StoreWithCity {
         return null;
     }
 
-    public
 }
