@@ -7,6 +7,7 @@ public class Candidate {
     private String name;
     private int id;
     private int cityId;
+    private String cityName;
     private List<Resume> resumeList;
 
     public Candidate(int id, String name, int cityId) {
@@ -43,14 +44,17 @@ public class Candidate {
         this.cityId = cityId;
     }
 
-    public void setResumeList(List<Resume> resumeList) {
-        this.resumeList = resumeList;
-
-
-
+    public String getCityName() {
+        return cityName;
     }
 
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
 
+    public void setResumeList(List<Resume> resumeList) {
+        this.resumeList = resumeList;
+    }
 
     @Override
     public boolean equals(Object o) {

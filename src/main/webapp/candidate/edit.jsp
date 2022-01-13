@@ -62,11 +62,13 @@
                     <div class="form-group">
 
                     <label>Город</label>
-                    <select class="form-control" id="selectCity" name="cityId" value="${city.id}">
-                    <option>Выберите город</option>
-                    <c:forEach items="${cities}" var="city">
-                    <option><c:out value="${city.name}"/></option>
-                    </c:forEach>
+                    <select required class="form-control" id="selectCity" name="cityId" value="${city.id}">
+                        <option label='Выберите город'></option>
+                            <c:forEach items="${cities}" var="city">
+                                <option>
+                                    <c:out value="${city.name}"/>
+                                </option>
+                            </c:forEach>
                     </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Сохранить</button>

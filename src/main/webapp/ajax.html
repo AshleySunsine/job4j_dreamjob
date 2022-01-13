@@ -49,12 +49,12 @@ function sendGreeting() {
         });
     }
 
-    function sendGreetingSecond() {
+    function sendGreeting() {
     $.ajax({
         type: 'POST',
-        url: 'http://localhost:8080/dreamjob/greetSecond',
+        url: 'http://localhost:8080/items/greet',
         data: JSON.stringify({
-            name: $('#email').val()
+            name: $('#exampleInputEmail1').val()
         }),
         dataType: 'json'
     }).done(function (data) {

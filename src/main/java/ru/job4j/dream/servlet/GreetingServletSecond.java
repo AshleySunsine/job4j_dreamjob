@@ -1,4 +1,4 @@
-package ru.job4j.dream.servlet;
+package ru.job4j.servlets;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -24,7 +24,7 @@ public class GreetingServletSecond extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Email email = GSON.fromJson(req.getReader(), Email.class);
         emails.add(email);
-        System.out.println("sdsdsdsdsdsd");
+
         resp.setContentType("application/json; charset=utf-8");
         OutputStream output = resp.getOutputStream();
         String json = GSON.toJson(email);
@@ -44,3 +44,4 @@ public class GreetingServletSecond extends HttpServlet {
     }
 
 }
+

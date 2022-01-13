@@ -21,18 +21,13 @@
     function validate() {
      var email = document.getElementById('email').value;
      var password = document.getElementById('password').value;
-     if (email == '') {
-         alert('Заполните поле "Почта"');
-         } else if (password == '') {
-            alert('Заполните поле "Пароль"');
-            } else {
-                let paramet = new Map();
-                map.set("email", email);
-                map.set("password", password);
-                return map;
-                }
-
-     return -1;
+     if ((email == '') || (password == '')) {
+         alert('Заполните поля');
+     }
+     let paramet = new Map();
+     map.set("email", email);
+     map.set("password", password);
+     return map;
     }
 
     function sendToServlet() {
@@ -62,11 +57,11 @@
                 <form action="<%=request.getContextPath()%>/auth.do" method="post">
                     <div class="form-group">
                         <label>Почта</label>
-                        <input type="text" class="form-control" id="email" name="email">
+                        <input required type="text" class="form-control" id="email" name="email">
                     </div>
                     <div class="form-group">
                         <label>Пароль</label>
-                        <input type="text" class="form-control" id="password" name="password">
+                        <input required type="text" class="form-control" id="password" name="password">
                     </div>
                     <button type="submit" class="btn btn-primary" onclick="sendToServlet()">Войти</button>
                     <c:if test="${not empty error}">

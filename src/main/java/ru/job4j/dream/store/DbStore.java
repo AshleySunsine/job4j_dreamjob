@@ -94,7 +94,7 @@ public class DbStore implements Store, StoreWithUser, StoreWithCity {
 
     private Post createPost(Post post) {
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps =  cn.prepareStatement("INSERT INTO post(name) VALUES (?)",
+             PreparedStatement ps =  cn.prepareStatement("INSERT INTO post(name,createdTime) VALUES (?, current_date)",
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
             ps.setString(1, post.getName());
@@ -112,7 +112,8 @@ public class DbStore implements Store, StoreWithUser, StoreWithCity {
 
     private Candidate createCandidate(Candidate candidate) {
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps =  cn.prepareStatement("INSERT INTO candidate (name, cityId) VALUES (?, ?)",
+             PreparedStatement ps =  cn.prepareStatement("INSERT INTO candidate (name, cityId,createdTime)"
+                             + " VALUES (?, ?, current_date)",
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
             ps.setString(1, candidate.getName());
@@ -132,7 +133,7 @@ public class DbStore implements Store, StoreWithUser, StoreWithCity {
     private void updatePost(Post post) {
         try (Connection cn = pool.getConnection();
             PreparedStatement ps = cn.prepareStatement("UPDATE post SET "
-                    + "name=(?) WHERE id=(?)")) {
+                    + "name=(?), createdTime=current_date WHERE id=(?)")) {
                     ps.setString(1, post.getName());
                     ps.setInt(2, post.getId());
                     ps.execute();
@@ -210,10 +211,9 @@ public class DbStore implements Store, StoreWithUser, StoreWithCity {
     }
 
     private void updateCandidate(Candidate candidate) {
-        System.out.println(candidate.getCityId() + " -----");
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement("UPDATE candidate SET "
-                     + "name=(?),cityId=(?) WHERE id=(?)")) {
+                     + "name=(?),cityId=(?),createdTime=current_date WHERE id=(?)")) {
             ps.setString(1, candidate.getName());
             ps.setInt(2, candidate.getCityId());
             ps.setInt(3, candidate.getId());
@@ -268,7 +268,8 @@ public class DbStore implements Store, StoreWithUser, StoreWithCity {
 
     private void createUser(User user) {
         try (Connection cn = pool.getConnection();
-        PreparedStatement ps = cn.prepareStatement("INSERT INTO users(name,email,password) VALUES (?,?,?)")) {
+        PreparedStatement ps = cn.prepareStatement("INSERT INTO users(name,email,password,createdTime) "
+                + "VALUES (?,?,?,current_date)")) {
             ps.setString(1, user.getName());
             ps.setString(2, user.getEmail());
             ps.setString(3, user.getPassword());
@@ -287,7 +288,7 @@ public class DbStore implements Store, StoreWithUser, StoreWithCity {
     public void updateUser(User user) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement("UPDATE users SET "
-                     + "name=(?), email=(?), password=(?) WHERE id=(?)")) {
+                     + "name=(?), email=(?), password=(?), createdTime=current_date WHERE id=(?)")) {
             ps.setString(1, user.getName());
             ps.setString(2, user.getEmail());
             ps.setString(3, user.getPassword());
@@ -345,7 +346,7 @@ public class DbStore implements Store, StoreWithUser, StoreWithCity {
     }
 
     @Override
-    public Collection<City> findAllCity() {
+    public List<City> findAllCity() {
         List<City> cities = new ArrayList<>();
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement("SELECT * FROM city")) {
@@ -392,6 +393,39 @@ public class DbStore implements Store, StoreWithUser, StoreWithCity {
             LOG.error(e.getMessage(), e);
         }
         return null;
+    }
+
+    public List<Candidate> findCandidateByDay() {
+        List<Candidate> candidates = new ArrayList<>();
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("select * from candidate "
+                     + "where createdtime between (current_date - 1) and current_date;")) {
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    candidates.add(new Candidate(rs.getInt("id"), rs.getString("name"),
+                            rs.getInt("cityId")));
+                }
+            }
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return candidates;
+    }
+
+    public List<Post> findPostByDay() {
+        List<Post> posts = new ArrayList<>();
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("select * from post "
+                     + "where createdtime between (current_date - 1) and current_date;")) {
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    posts.add(new Post(rs.getInt("id"), rs.getString("name")));
+                }
+            }
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return posts;
     }
 
 }

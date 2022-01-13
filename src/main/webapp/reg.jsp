@@ -23,19 +23,15 @@
          var name =  document.getElementById('name').value;
          var email = document.getElementById('email').value;
          var password = document.getElementById('password').value;
-         if (name == '') {
-            alert('Заполните поле "Имя"');
-            } else if (email == '') {
-                 alert('Заполните поле "Почта"');
-                 } else if (password == '') {
-                    alert('Заполните поле "Пароль"');
-                    } else {
-                        let paramet = new Map();
-                        map.set("name", name);
-                        map.set("email", email);
-                        map.set("password", password);
-                        return map;
-                        }
+         if ((email == '') || (password == '') || (name == '')) {
+                  alert('Заполните поля');
+         }
+         let paramet = new Map();
+         map.set("name", name);
+         map.set("email", email);
+         map.set("password", password);
+         return map;
+         }
 
          return -1;
         }
@@ -75,7 +71,7 @@
                        </div>
                        <div class="form-group">
                            <label>Пароль</label>
-                           <input required type="text" class="form-control" name="password" id="password">
+                           <input required type="password" class="form-control" name="password" id="password">
                        </div>
                        <c:if test="${not empty error}">
                                                <div style="color:red; font-weight: bold; margin: 30px 0;">

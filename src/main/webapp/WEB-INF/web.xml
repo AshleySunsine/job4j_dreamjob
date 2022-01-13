@@ -138,4 +138,22 @@
     <servlet-name>EditCandidateServlet</servlet-name>
     <url-pattern>/candidate/edit.do</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ListCandidatesServlet</servlet-name>
+    <servlet-class>ru.job4j.dream.servlet.IndexServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListCandidatesServlet</servlet-name>
+    <url-pattern>/listCandidates</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ListPostsServlet</servlet-name>
+    <servlet-class>ru.job4j.dream.servlet.IndexServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListPostsServlet</servlet-name>
+    <url-pattern>/listPosts</url-pattern>
+  </servlet-mapping>
 </web-app>
