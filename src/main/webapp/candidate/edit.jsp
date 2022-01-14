@@ -56,7 +56,7 @@
                 <form action="<%=request.getContextPath()%>/candidates.do?id=<%=candidate.getId()%>" method="post">
                     <div class="form-group">
                         <label>Имя</label>
-                        <input type="text" class="form-control" name="nameOfCandidate" value="<%=candidate.getName()%>">
+                        <input required type="text" class="form-control" name="nameOfCandidate" value="<%=candidate.getName()%>">
                     </div>
 
                     <div class="form-group">

@@ -94,15 +94,6 @@
     <url-pattern>/logout.do</url-pattern>
   </servlet-mapping>
 
-  <filter>
-    <filter-name>AuthFilter</filter-name>
-    <filter-class>ru.job4j.dream.filter.AuthFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>AuthFilter</filter-name>
-    <url-pattern>*.do</url-pattern>
-  </filter-mapping>
-
   <servlet>
     <servlet-name>RegServlet</servlet-name>
     <servlet-class>ru.job4j.dream.servlet.RegServlet</servlet-class>
@@ -156,4 +147,22 @@
     <servlet-name>ListPostsServlet</servlet-name>
     <url-pattern>/listPosts</url-pattern>
   </servlet-mapping>
+
+  <filter>
+    <filter-name>AuthFilter</filter-name>
+    <filter-class>ru.job4j.dream.filter.AuthFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AuthFilter</filter-name>
+    <url-pattern>*.do</url-pattern>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>CorsFilter</filter-name>
+    <filter-class>ru.job4j.dream.filter.CorsFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>CorsFilter</filter-name>
+    <url-pattern>*</url-pattern>
+  </filter-mapping>
 </web-app>
