@@ -45,6 +45,7 @@ public class IndexServlet extends HttpServlet {
         String jsonLi = GSON.toJson(jsonList);
         System.out.println(jsonLi);
         output.write((jsonLi).getBytes(StandardCharsets.UTF_8));
+        System.out.println(output);
         output.flush();
         output.close();
     }
