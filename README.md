@@ -1,6 +1,8 @@
 1. Техническое задание: Проект "Работа мечты"
 
 Что бы попасть на сайт нужно пройти регистрацию и авторизацию.
+http://localhost:8080/dreamjob
+
 ![ScreenShot](images/auth.jpg)
 ![ScreenShot](images/reg.jpg)
 
